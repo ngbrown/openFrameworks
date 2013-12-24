@@ -7,11 +7,12 @@ void testApp::setup(){
     //ofSetLogLevel(OF_LOG_VERBOSE);
 	project = NULL;
 
-	while(!checkConfigExists()){
-		askOFRoot();
+	string rootPath = getOFRootFromConfig();
+	if(rootPath != "") {
+		setOFRoot(rootPath);
 	}
 
-	setOFRoot(getOFRootFromConfig());
+	while(askOFRoot() == false);
 
 	setupDrawableOFPath();
 
@@ -328,8 +329,7 @@ void testApp::createAndOpenPressed(){
 
 void testApp::changeOFRootPressed(){
 	askOFRoot();
-	cout << getOFRootFromConfig()<<endl;
-	setOFRoot(getOFRootFromConfig());
+	cout << "OF Root set to: " << getOFRootFromConfig()<<endl;
 	setupDrawableOFPath();
 }
 

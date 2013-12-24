@@ -45,6 +45,7 @@ string getOFRelPath(string from);
 bool checkConfigExists();
 bool askOFRoot();
 string getOFRootFromConfig();
+void saveOFRootToConfig(string filePath);
 
 template <class T>
 inline bool isInVector(T item, vector<T> & vec){

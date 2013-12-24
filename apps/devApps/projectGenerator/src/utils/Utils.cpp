@@ -411,7 +411,7 @@ string unsplitString (vector < string > strings, string deliminator ){
 }
 
 
-static string OFRoot = "../../..";
+static string OFRoot = "../../../../../";
 
 string getOFRoot(){
 	return ofFilePath::removeTrailingSlash(OFRoot);
@@ -495,13 +495,12 @@ bool checkConfigExists(){
 }
 
 bool askOFRoot(){
-	ofFileDialogResult res = ofSystemLoadDialog("OF project generator", "choose the folder of your OF install");
+	ofFileDialogResult res = ofSystemLoadDialog("Choose the folder of your OF install", true, ofFilePath::getPathForDirectory(getOFRoot()));
 	if (res.fileName == "" || res.filePath == "") return false;
 
-	ofDirectory config(ofFilePath::join(ofFilePath::getUserHomeDir(),".ofprojectgenerator"));
-	config.create(true);
-	ofFile configFile(ofFilePath::join(ofFilePath::getUserHomeDir(),".ofprojectgenerator/config"),ofFile::WriteOnly);
-	configFile << res.filePath;
+	setOFRoot(res.filePath);
+	saveOFRootToConfig(res.filePath);
+
 	return true;
 }
 
@@ -510,4 +509,11 @@ string getOFRootFromConfig(){
 	ofFile configFile(ofFilePath::join(ofFilePath::getUserHomeDir(),".ofprojectgenerator/config"),ofFile::ReadOnly);
 	ofBuffer filePath = configFile.readToBuffer();
 	return filePath.getFirstLine();
+}
+
+void saveOFRootToConfig(string filePath) {
+	ofDirectory config(ofFilePath::join(ofFilePath::getUserHomeDir(),".ofprojectgenerator"));
+	config.create(true);
+	ofFile configFile(ofFilePath::join(ofFilePath::getUserHomeDir(),".ofprojectgenerator/config"),ofFile::WriteOnly);
+	configFile << filePath;
 }
