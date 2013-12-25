@@ -1,3 +1,6 @@
 [submodule "apps/projectGenerator/projectGeneratorSimple"]
 	path = apps/projectGenerator/projectGeneratorSimple
 	url = https://github.com/ngbrown/projectGeneratorSimple.git
+[submodule "addons/ofxGStreamer"]
+	path = addons/ofxGStreamer
+	url = https://github.com/ngbrown/ofxGStreamer.git
