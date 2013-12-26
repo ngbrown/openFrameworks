@@ -4,3 +4,9 @@
 [submodule "addons/ofxGStreamer"]
 	path = addons/ofxGStreamer
 	url = https://github.com/ngbrown/ofxGStreamer.git
+[submodule "addons/ofxCv"]
+	path = addons/ofxCv
+	url = https://github.com/ngbrown/ofxCv.git
+[submodule "addons/ofxControlPanel"]
+	path = addons/ofxControlPanel
+	url = https://github.com/kylemcdonald/ofxControlPanel.git
