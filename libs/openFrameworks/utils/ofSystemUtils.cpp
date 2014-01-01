@@ -207,7 +207,7 @@ static int CALLBACK loadDialogBrowseCallback(
     string defaultPath = *(string*)lpData;
     if(defaultPath!="" && uMsg==BFFM_INITIALIZED){
 		wchar_t         wideCharacterBuffer[MAX_PATH];
-		wcscpy_s(wideCharacterBuffer, convertNarrowToWide(ofToDataPath(defaultPath)).c_str());
+		wcscpy(wideCharacterBuffer, convertNarrowToWide(ofToDataPath(defaultPath)).c_str());
         SendMessage(hwnd,BFFM_SETSELECTION,1,(LPARAM)wideCharacterBuffer);
     }
 
@@ -322,9 +322,9 @@ ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection,
 		LPMALLOC		lpMalloc;
 
 		if (windowTitle != "") {
-			wcscpy_s(wideWindowTitle, convertNarrowToWide(windowTitle).c_str());
+			wcscpy(wideWindowTitle, convertNarrowToWide(windowTitle).c_str());
 		} else {
-			wcscpy_s(wideWindowTitle, L"Select Directory");
+			wcscpy(wideWindowTitle, L"Select Directory");
 		}
 
 		// Get a pointer to the shell memory allocator
@@ -335,7 +335,7 @@ ofFileDialogResult ofSystemLoadDialog(string windowTitle, bool bFolderSelection,
 		bi.pidlRoot         =   NULL;
 		bi.pszDisplayName   =   wideCharacterBuffer;
 		bi.lpszTitle        =   wideWindowTitle;
-		bi.ulFlags          =   BIF_RETURNFSANCESTORS | BIF_RETURNONLYFSDIRS | BIF_USENEWUI | BIF_NONEWFOLDERBUTTON;
+		bi.ulFlags          =   BIF_RETURNFSANCESTORS | BIF_RETURNONLYFSDIRS | BIF_USENEWUI;
 		bi.lpfn             =   &loadDialogBrowseCallback;
 		bi.lParam           =   (LPARAM) &defaultPath;
 
